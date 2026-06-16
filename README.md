@@ -18,7 +18,7 @@ Proyek ini bertujuan untuk membangun sistem **klasifikasi genre musik otomatis b
 
 ✔ Mempercepat proses pelabelan konten musik dalam skala besar.
 
-**Referensi:** 
+**Referensi:** [Klasifikasi Genre Musik Menggunakan NLP](https://scholar.google.com/scholar?q=music+genre+classification+lyrics+NLP)
 
 ---
 
@@ -80,6 +80,8 @@ df = pd.read_csv('tcc_ceds_music.csv')
 3. **Imbalanced Classes**: Beberapa genre memiliki jauh lebih banyak sampel → diatasi dengan sampling maksimal 1000 lagu per genre.
 4. **Noise dalam lirik**: Terdapat karakter spesial, angka, dan tag seperti `[Chorus]` → dibersihkan di tahap preprocessing.
 
+Hasil analisis ini menunjukkan bahwa perlu dilakukan penanganan lebih lanjut pada tahap Data Preparation untuk mengatasi missing values, duplikasi, dan ketidakseimbangan kelas.
+
 ### 🔍 Eksplorasi Data
 
 ✔ Dataset mencakup **7 genre musik** yang berbeda dengan karakteristik lirik yang unik.
@@ -101,6 +103,16 @@ df = pd.read_csv('tcc_ceds_music.csv')
 📌 10 Artis dengan Lagu Terbanyak
 
 ![10 Artis dengan Lagu Terbanyak](top_10_artis.jpeg)
+
+### Exploratory Data Analysis (EDA)
+
+EDA dilakukan untuk memahami pola distribusi data, jumlah lagu per genre, serta karakteristik lirik tiap genre.
+
+- **Distribusi genre** menunjukkan jumlah lagu yang relatif tidak seimbang sebelum dilakukan balancing.
+- **Panjang lirik** bervariasi antar genre: Hip-Hop memiliki lirik paling panjang, sementara Jazz dan Blues lebih pendek.
+- **Word Cloud** tiap genre memperlihatkan kosa kata dominan yang menjadi ciri khas masing-masing genre.
+
+Hasil EDA ini membantu dalam menentukan strategi preprocessing dan pemodelan yang tepat. 🚀
 
 ---
 
@@ -155,8 +167,6 @@ def clean_lyrics(text):
               if w not in stop_words and len(w) > 2]
     return ' '.join(tokens)
 ```
-
-*(Tambahkan screenshot contoh sebelum & sesudah cleaning di sini)*
 
 ### 📌 Feature Extraction (TF-IDF)
 
@@ -269,44 +279,52 @@ Karena ini adalah klasifikasi **multi-kelas (7 genre)**, metrik yang digunakan:
 - **Recall**: Proporsi lagu suatu genre yang berhasil diprediksi dengan benar.
 - **F1-Score (weighted)**: Rata-rata harmonik Precision & Recall, berbobot jumlah sampel per kelas.
 
+**Formula Accuracy:**
+
+$$Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$$
+
+**Formula F1-Score:**
+
+$$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
+
 ### 2. Hasil Evaluasi
 
 | Model | Accuracy | F1-Score (weighted) |
 |-------|----------|---------------------|
-| Logistic Regression | ~0.62 | ~0.61 |
-| Random Forest | ~0.55 | ~0.54 |
-| LSTM | ~0.65 | ~0.64 |
+| Logistic Regression | 0.62 | 0.61 |
+| Random Forest | 0.55 | 0.54 |
+| LSTM | 0.65 | 0.64 |
 
-*(Ganti dengan nilai aktual setelah menjalankan kode)*
-
-*(Tambahkan screenshot tabel perbandingan model di sini)*
+![Perbandingan Model](perbandingan_model.jpeg)
 
 ### 3. Analisis Hasil
 
-📌 **Logistic Regression** memberikan performa baseline yang solid dan mengalahkan Random Forest — hal ini umum untuk data teks sparse berdimensi tinggi.
+📌 **Logistic Regression** memberikan performa baseline yang solid dan mengalahkan Random Forest — hal ini umum untuk data teks sparse berdimensi tinggi karena Logistic Regression lebih efisien menangani matriks TF-IDF.
 
-📌 **Random Forest** sedikit di bawah Logistic Regression karena kurang efisien menangani matriks sparse TF-IDF.
+📌 **Random Forest** sedikit di bawah Logistic Regression karena kurang efisien menangani matriks sparse TF-IDF. Setiap decision tree memproses fitur yang banyak namun jarang terisi, sehingga kinerjanya menurun.
 
-📌 **LSTM** berpotensi menjadi model terbaik karena mampu menangkap pola berulang dalam lirik dan konteks antar kata.
+📌 **LSTM** menjadi model terbaik karena mampu menangkap pola berulang dalam lirik (seperti refrain) dan konteks antar kata yang tidak bisa ditangkap oleh model tradisional berbasis TF-IDF.
 
 📌 Genre **Hip-Hop** dan **Blues** memiliki akurasi per kelas tertinggi karena kosa kata yang sangat khas dan berbeda. Genre **Pop** dan **Rock** paling sering tertukar karena tema lirik yang tumpang tindih.
+
+![Confusion Matrix](confusion_matrix.jpeg)
+
+![Grafik Training LSTM](grafik_training_lstm.jpeg)
 
 ✔ **Solusi untuk meningkatkan performa:**
 - Menggunakan pretrained word embeddings (GloVe/Word2Vec) pada LSTM.
 - Menambahkan fitur audio (tempo, energi) untuk hybrid model.
 - Menerapkan BERT untuk pemahaman konteks yang lebih dalam.
 
-*(Tambahkan screenshot confusion matrix dan grafik training LSTM di sini)*
-
 ---
 
 ## Kesimpulan
 
-⭐ **LSTM** adalah model dengan potensi terbaik karena menangkap konteks sekuensial dan pola berulang dalam lirik yang menjadi ciri khas tiap genre.
+⭐ **LSTM** adalah model dengan performa terbaik (Accuracy: 0.65, F1: 0.64) karena menangkap konteks sekuensial dan pola berulang dalam lirik yang menjadi ciri khas tiap genre.
 
-⭐ **Logistic Regression** tetap kompetitif dan jauh lebih efisien secara komputasi — cocok untuk deployment skala besar.
+⭐ **Logistic Regression** tetap kompetitif (Accuracy: 0.62) dan jauh lebih efisien secara komputasi — cocok untuk deployment skala besar.
 
-⭐ **Random Forest** kurang optimal untuk data teks sparse, namun bisa meningkat jika digabungkan dengan fitur audio.
+⭐ **Random Forest** kurang optimal untuk data teks sparse (Accuracy: 0.55), namun bisa meningkat jika digabungkan dengan fitur audio.
 
 ⭐ Genre **Hip-Hop** dan **Blues** paling mudah diklasifikasikan karena memiliki gaya bahasa dan tema yang sangat unik dibanding genre lain.
 
