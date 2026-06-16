@@ -92,19 +92,15 @@ df = pd.read_csv('tcc_ceds_music.csv')
 
 📌 Distribusi Genre
 
-![Distribusi Genre] (bar chart dan pie chart.jpeg)
+![Distribusi Genre](distribusi_genre.jpeg)
 
 📌 Rata-rata Panjang Lirik per Genre
 
-*(Tambahkan screenshot chart panjang lirik di sini)*
+![Rata-rata Panjang Lirik](rata_rata_panjang_lirik.jpeg)
 
 📌 10 Artis dengan Lagu Terbanyak
 
-*(Tambahkan screenshot chart artis di sini)*
-
-📌 Word Cloud per Genre
-
-*(Tambahkan screenshot word cloud 7 genre di sini)*
+![10 Artis dengan Lagu Terbanyak](top_10_artis.jpeg)
 
 ---
 
