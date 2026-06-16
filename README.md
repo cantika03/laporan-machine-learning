@@ -18,7 +18,7 @@ Proyek ini bertujuan untuk membangun sistem **klasifikasi genre musik otomatis b
 
 ✔ Mempercepat proses pelabelan konten musik dalam skala besar.
 
-**Referensi:** [Klasifikasi Genre Musik Menggunakan NLP](https://scholar.google.com/scholar?q=music+genre+classification+lyrics+NLP)
+**Referensi:** (https://journal.stmiki.ac.id/index.php/jimik/article/view/1697)
 
 ---
 
