@@ -295,7 +295,7 @@ $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
 | Random Forest | 0.55 | 0.54 |
 | LSTM | 0.65 | 0.64 |
 
-![Perbandingan Model](perbandingan_model.jpeg)
+![Perbandingan Model](perbandingan_akurasi_model.jpeg)
 
 ### 3. Analisis Hasil
 
@@ -309,7 +309,7 @@ $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
 
 ![Confusion Matrix](confusion_matrix.jpeg)
 
-![Grafik Training LSTM](grafik_training_lstm.jpeg)
+![Grafik Training LSTM](training_lstm.jpeg)
 
 ✔ **Solusi untuk meningkatkan performa:**
 - Menggunakan pretrained word embeddings (GloVe/Word2Vec) pada LSTM.
