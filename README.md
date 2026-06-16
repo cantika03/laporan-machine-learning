@@ -1,6 +1,6 @@
 # Laporan Proyek Machine Learning - Shinta Lavera & Cantika Indie Pahla
 
-## Klasifikasi Genre Musik Berdasarkan Lirik Lagu
+## Analisis Lirik Lagu untuk Klasifikasi Genre Musik Menggunakan Pendekatan NLP dan LSTM
 
 ---
 
@@ -320,12 +320,4 @@ $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
 
 ## Kesimpulan
 
-⭐ **LSTM** adalah model dengan performa terbaik (Accuracy: 0.65, F1: 0.64) karena menangkap konteks sekuensial dan pola berulang dalam lirik yang menjadi ciri khas tiap genre.
-
-⭐ **Logistic Regression** tetap kompetitif (Accuracy: 0.62) dan jauh lebih efisien secara komputasi — cocok untuk deployment skala besar.
-
-⭐ **Random Forest** kurang optimal untuk data teks sparse (Accuracy: 0.55), namun bisa meningkat jika digabungkan dengan fitur audio.
-
-⭐ Genre **Hip-Hop** dan **Blues** paling mudah diklasifikasikan karena memiliki gaya bahasa dan tema yang sangat unik dibanding genre lain.
-
-⭐ Proyek ini dapat dikembangkan lebih lanjut dengan pendekatan multimodal yang menggabungkan fitur lirik dan fitur audio (tempo, energi, danceability) dari Spotify API untuk akurasi yang lebih tinggi.
+Berdasarkan hasil penelitian, model LSTM menunjukkan performa terbaik dalam klasifikasi genre musik berdasarkan lirik lagu dengan nilai accuracy sebesar 0,65 dan F1-score sebesar 0,64, karena mampu menangkap konteks sekuensial serta pola berulang yang menjadi ciri khas setiap genre. Logistic Regression juga memberikan hasil yang cukup kompetitif dengan accuracy 0,62 dan memiliki keunggulan dari sisi efisiensi komputasi sehingga cocok untuk implementasi skala besar. Sementara itu, Random Forest memperoleh performa terendah dengan accuracy 0,55 karena kurang optimal dalam menangani data teks yang direpresentasikan dalam bentuk matriks TF-IDF yang bersifat sparse. Selain itu, genre Hip-Hop dan Blues merupakan genre yang paling mudah diklasifikasikan karena memiliki karakteristik kosa kata yang lebih khas dibandingkan genre lainnya. Secara keseluruhan, proyek ini berhasil menunjukkan bahwa teknik Natural Language Processing (NLP) dan Machine Learning dapat dimanfaatkan untuk mengklasifikasikan genre musik secara otomatis berdasarkan lirik lagu, serta masih memiliki peluang pengembangan lebih lanjut melalui penggunaan model yang lebih canggih seperti BERT maupun pendekatan multimodal yang menggabungkan fitur lirik dan audio.
