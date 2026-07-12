@@ -317,6 +317,8 @@ $$F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}$$
 - Menerapkan BERT untuk pemahaman konteks yang lebih dalam.
 
 ---
+deploy Apk :
+https://deployliriklagu-maytbd44rhdrpktdhd8mrp.streamlit.app/
 
 ## Kesimpulan
 
